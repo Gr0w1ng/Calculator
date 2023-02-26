@@ -67,4 +67,7 @@ button0.grid(column =0, row = 6, columnspan = 2, sticky = (W , E))
 buttonPunto.grid(column =2, row = 6)
 buttonResta.grid(column =3, row = 6)
 
+buttonIgual.grid(column =0, row = 7, columnspan=3 , sticky = (W , E))
+buttonRaizCuadrada.grid(column =3, row = 7)
+
 root.mainloop()
