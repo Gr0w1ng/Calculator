@@ -7,6 +7,7 @@ root.title("Calculator")
 root.geometry("+500+80")
 
 estilos = ttk.Style()
+estilos.theme_use("clam")
 estilos.configure("mainframe.TFrame", background="#DBDBDB")
 
 mainframe = ttk.Frame(root, style="mainframe.TFrame")
@@ -33,6 +34,7 @@ estilosBotonesNumeros.configure("Botones_numeros.TButton", font="arial 22", widt
 
 estilosBotonesBorrar = ttk.Style()
 estilosBotonesBorrar.configure("Botones_borrar.TButton", font="arial 22", width="5", background="#CECECE",relief="flat")
+estilosBotonesBorrar.map("Botones_borrar.TButton", foreground=[("active", "#FF0000")], background=[("active", "#858585")])
 
 estilosBotonesRestantes = ttk.Style()
 estilosBotonesRestantes.configure("Botones_restantes.TButton", font="arial 22", width="5", background="#CECECE",relief="flat")
@@ -92,5 +94,8 @@ buttonResta.grid(column =3, row = 6)
 
 buttonIgual.grid(column =0, row = 7, columnspan=3 , sticky = (W , E))
 buttonRaizCuadrada.grid(column =3, row = 7)
+
+for child in mainframe.winfo_children():
+    child.grid_configure(ipady= 10, padx= 1, pady= 1)
 
 root.mainloop()
