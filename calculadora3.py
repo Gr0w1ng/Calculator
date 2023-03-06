@@ -31,6 +31,28 @@ def TemaClaro(*args):
     estilosBotonesRestantes.configure("Botones_restantes.TButton",background="#CECECE",foreground="black")
     estilosBotonesRestantes.map("Botones_restantes.TButton",background=[("active","#858585")])    
 
+def ingresarValoresTeclado(event):
+    tecla = event.char 
+    
+    if tecla >= "0" and tecla <= "9" or tecla == "(" or tecla == ")" or tecla == ".":
+        entrada2.set(entrada2.get() + tecla)
+        
+    if tecla == "*" or tecla == "/" or tecla == "+" or tecla == "-":
+        if tecla == "*":
+            entrada1.set(entrada2.get() + "*")
+        elif tecla == "/":
+            entrada1.set(entrada2.get() + "/")
+        elif tecla == "+":
+            entrada1.set(entrada2.get() + "+")
+        elif tecla == "-":
+            entrada1.set(entrada2.get() + "-")
+        
+        entrada2.set("")
+    if tecla == "=":
+        entrada1.set(entrada1.get()+entrada2.get())
+        resultado = eval(entrada1.get())
+        entrada2.set(resultado)
+
 def ingresarValores(tecla):
     if tecla >= "0" and tecla <= "9" or tecla == "(" or tecla == ")" or tecla == ".":
         entrada2.set(entrada2.get() + tecla)
@@ -50,7 +72,24 @@ def ingresarValores(tecla):
         entrada1.set(entrada1.get()+entrada2.get())
         resultado = eval(entrada1.get())
         entrada2.set(resultado)
+
+def raizCuadrada():
+    entrada1.set("")
+    resultado = sqrt(float(entrada2.get()))    
+    entrada2.set(resultado)
     
+def borrar(*args):
+    inicio = 0   
+    final = len(entrada2.get())
+
+    entrada2.set(entrada2.get()[inicio:final-1])
+
+def borrarTodo(*args):
+    entrada1.set("")
+    entrada2.set("")
+
+
+
 root  = Tk()
 root.title("Calculator")
 root.geometry("+500+80")
@@ -121,8 +160,8 @@ button7 = ttk.Button(mainframe, text= 7, style="Botones_numeros.TButton", comman
 button8 = ttk.Button(mainframe, text= 8, style="Botones_numeros.TButton", command= lambda: ingresarValores("8"))
 button9 = ttk.Button(mainframe, text= 9, style="Botones_numeros.TButton", command= lambda: ingresarValores("9"))
 
-buttonBorrar = ttk.Button(mainframe, text= chr(9003), style="Botones_borrar.TButton")
-buttonBorrarTodo = ttk.Button(mainframe, text= "C", style="Botones_borrar.TButton")
+buttonBorrar = ttk.Button(mainframe, text= chr(9003), style="Botones_borrar.TButton", command = lambda: borrar())
+buttonBorrarTodo = ttk.Button(mainframe, text= "C", style="Botones_borrar.TButton", command = lambda: borrarTodo())
 buttonParantesis1 = ttk.Button(mainframe, text= "(", style="Botones_restantes.TButton", command= lambda: ingresarValores("("))
 buttonParantesis2 = ttk.Button(mainframe, text= ")",style="Botones_restantes.TButton", command= lambda: ingresarValores(")"))
 buttonPunto = ttk.Button(mainframe, text= ".",style="Botones_restantes.TButton", command= lambda: ingresarValores("."))
@@ -133,7 +172,7 @@ buttonResta = ttk.Button(mainframe, text= "-",style="Botones_restantes.TButton",
 buttonSuma = ttk.Button(mainframe, text= "+",style="Botones_restantes.TButton", command= lambda: ingresarValores("+"))
 
 buttonIgual = ttk.Button(mainframe, text= "=",style="Botones_restantes.TButton", command= lambda: ingresarValores("="))
-buttonRaizCuadrada = ttk.Button(mainframe, text= "√",style="Botones_restantes.TButton")
+buttonRaizCuadrada = ttk.Button(mainframe, text= "√",style="Botones_restantes.TButton", command= lambda: raizCuadrada())
 
 #Coloca botones en pantalla
 
@@ -169,5 +208,7 @@ for child in mainframe.winfo_children():
 
 root.bind('<KeyPress-o>', TemaOscuro)
 root.bind('<KeyPress-c>', TemaClaro)
-
+root.bind('<Key>', ingresarValoresTeclado)
+root.bind('<KeyPress-b>', borrar)
+root.bind('<KeyPress-t>', borrarTodo)
 root.mainloop()
