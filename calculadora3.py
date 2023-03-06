@@ -2,35 +2,80 @@ from tkinter import *
 from tkinter import ttk
 from math import *
 
+def TemaOscuro(*args):
+    estilos.configure("Mainframe.TFram", background="#010924")
+    estilosLabel1.configure("label1.TLabel", background="#010924", foreground="white")
+    estilosLabel1.configure("label2.TLabel", background="#010924", foreground="white")
+
+    estilosBotonesNumeros.configure("Botones_numeros.TButton",background="#00044A", foreground="white")
+    estilosBotonesNumeros.map("Botones_numeros.TButton", background=[("active","#020A90")])
+    
+    estilosBotonesBorrar.configure("Botones_borrar.TButton",background="#010924", foreground="white")
+    estilosBotonesBorrar.map("Botones_borrar.TButton",background=[("active","#000AB1")])
+    
+    estilosBotonesRestantes.configure("Botones_restantes.TButton",background="#010924",foreground="white")
+    estilosBotonesRestantes.map("Botones_restantes.TButton",background=[("active","#000AB1")])
+
+def TemaClaro(*args):
+    estilos.configure("mainframe.TFrame", background="#DBDBDB",foreground="black")
+    
+    estilosLabel1.configure("label1.TLabel", background="#DBDBDB",foreground="black")
+    estilosLabel2.configure("label2.TLabel", background="#DBDBDB",foreground="black")
+    
+    estilosBotonesNumeros.configure("Botones_numeros.TButton",background="#FFFFFF", foreground="black")
+    estilosBotonesNumeros.map("Botones_numeros.TButton", background=[("active","#B9B9B9")])
+    
+    estilosBotonesBorrar.configure("Botones_borrar.TButton",background="#CECECE", foreground="black")
+    estilosBotonesBorrar.map("Botones_borrar.TButton",background=[("active","#858585")])
+    
+    estilosBotonesRestantes.configure("Botones_restantes.TButton",background="#CECECE",foreground="black")
+    estilosBotonesRestantes.map("Botones_restantes.TButton",background=[("active","#858585")])    
+
 root  = Tk()
 root.title("Calculator")
 root.geometry("+500+80")
+root.columnconfigure(0, weight=1)
+root.rowconfigure(0, weight=1)
 
 estilos = ttk.Style()
 estilos.theme_use("clam")
 estilos.configure("mainframe.TFrame", background="#DBDBDB")
 
 mainframe = ttk.Frame(root, style="mainframe.TFrame")
-mainframe.grid(column = 0, row = 0)
+mainframe.grid(column = 0, row =0, sticky = (W,N,E,S))
+mainframe.columnconfigure(0, weight=1)
+mainframe.columnconfigure(1, weight=1)
+mainframe.columnconfigure(2, weight=1)
+mainframe.columnconfigure(3, weight=1)
+
+mainframe.rowconfigure(0, weight=1)
+mainframe.rowconfigure(1, weight=1)
+mainframe.rowconfigure(2, weight=1)
+mainframe.rowconfigure(3, weight=1)
+mainframe.rowconfigure(4, weight=1)
+mainframe.rowconfigure(5, weight=1)
+mainframe.rowconfigure(6, weight=1)
+mainframe.rowconfigure(7, weight=1)
 
 estilosLabel1 = ttk.Style()
-estilosLabel1.configure("label1.TLabel", font= "arial 15", anchor = "E") 
+estilosLabel1.configure("label1.TLabel", font= "arial 15", anchor = "e") 
 
 estilosLabel2 = ttk.Style()
 estilosLabel2.configure("label2.TLabel", font= "arial 40", anchor = "e") 
 
 entrada1 = StringVar()
 label_entrada1 = ttk.Label(mainframe, textvariable=entrada1, style="label1.TLabel")
-label_entrada1.grid(column = 0, row =0, columnspan=4,sticky=(W, E))
+label_entrada1.grid(column = 0, row =0, columnspan=4,sticky=(W, N, E ,S))
 
 entrada2 = StringVar()
 label_entrada2 = ttk.Label(mainframe, textvariable = entrada2,style="label2.TLabel")
-label_entrada2.grid(column = 0, row =0, columnspan=4,sticky=(W,E))
+label_entrada2.grid(column = 0, row =0, columnspan=4,sticky=(W, N, E ,S))
 
 #Estilos de los botones
 
 estilosBotonesNumeros = ttk.Style()
 estilosBotonesNumeros.configure("Botones_numeros.TButton", font="arial 22", width="5", background="#FFFFFF",relief="flat")
+estilosBotonesNumeros.map("Botones_numeros.TButton", background=[('active', '#B9B9B9')])
 
 estilosBotonesBorrar = ttk.Style()
 estilosBotonesBorrar.configure("Botones_borrar.TButton", font="arial 22", width="5", background="#CECECE",relief="flat")
@@ -38,6 +83,7 @@ estilosBotonesBorrar.map("Botones_borrar.TButton", foreground=[("active", "#FF00
 
 estilosBotonesRestantes = ttk.Style()
 estilosBotonesRestantes.configure("Botones_restantes.TButton", font="arial 22", width="5", background="#CECECE",relief="flat")
+estilosBotonesRestantes.map("Botones_restantes.TButton", background=[('active', '#858585')])
 
 #Botones
 
@@ -68,34 +114,37 @@ buttonRaizCuadrada = ttk.Button(mainframe, text= "√",style="Botones_restantes.
 
 #Coloca botones en pantalla
 
-buttonParantesis1.grid(column= 0, row= 2)
-buttonParantesis2.grid(column= 1, row=2)
-buttonBorrarTodo.grid(column= 2, row=2)
-buttonBorrar.grid(column= 3, row=2)
+buttonParantesis1.grid(column= 0, row= 2,sticky=(W, N, E ,S))
+buttonParantesis2.grid(column= 1, row=2,sticky=(W, N, E ,S))
+buttonBorrarTodo.grid(column= 2, row=2,sticky=(W, N, E ,S))
+buttonBorrar.grid(column= 3, row=2,sticky=(W, N, E ,S))
 
-button7.grid(column =0, row = 3)
-button8.grid(column =1, row = 3)
-button9.grid(column =2, row = 3)
-buttonDivision.grid(column =3, row = 3)
+button7.grid(column =0, row = 3,sticky=(W, N, E ,S))
+button8.grid(column =1, row = 3,sticky=(W, N, E ,S))
+button9.grid(column =2, row = 3,sticky=(W, N, E ,S))
+buttonDivision.grid(column =3, row = 3,sticky=(W, N, E ,S))
 
-button4.grid(column =0, row = 4)
-button5.grid(column =1, row = 4)
-button6.grid(column =2, row = 4)
-buttonMultiplicacion.grid(column =3, row = 4)
+button4.grid(column =0, row = 4,sticky=(W, N, E ,S))
+button5.grid(column =1, row = 4,sticky=(W, N, E ,S))
+button6.grid(column =2, row = 4,sticky=(W, N, E ,S))
+buttonMultiplicacion.grid(column =3, row = 4,sticky=(W, N, E ,S))
 
-button1.grid(column =0, row = 5)
-button2.grid(column =1, row = 5)
-button3.grid(column =2, row = 5)
-buttonSuma.grid(column =3, row = 5)
+button1.grid(column =0, row = 5,sticky=(W, N, E ,S))
+button2.grid(column =1, row = 5,sticky=(W, N, E ,S))
+button3.grid(column =2, row = 5,sticky=(W, N, E ,S))
+buttonSuma.grid(column =3, row = 5,sticky=(W, N, E ,S))
 
-button0.grid(column =0, row = 6, columnspan = 2, sticky = (W , E))
-buttonPunto.grid(column =2, row = 6)
-buttonResta.grid(column =3, row = 6)
+button0.grid(column =0, row = 6, columnspan = 2,sticky=(W, N, E ,S))
+buttonPunto.grid(column =2, row = 6,sticky=(W, N, E ,S))
+buttonResta.grid(column =3, row = 6,sticky=(W, N, E ,S))
 
-buttonIgual.grid(column =0, row = 7, columnspan=3 , sticky = (W , E))
-buttonRaizCuadrada.grid(column =3, row = 7)
+buttonIgual.grid(column =0, row = 7, columnspan=3 ,sticky=(W, N, E ,S))
+buttonRaizCuadrada.grid(column =3, row = 7,sticky=(W, N, E ,S))
 
 for child in mainframe.winfo_children():
     child.grid_configure(ipady= 10, padx= 1, pady= 1)
+
+root.bind('<KeyPress-o>', TemaOscuro)
+root.bind('<KeyPress-c>', TemaClaro)
 
 root.mainloop()
